@@ -150,12 +150,30 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\FruitTile.cpp" />
+    <ClCompile Include="..\Classes\Ghost.cpp" />
+    <ClCompile Include="..\Classes\Level1.cpp" />
+    <ClCompile Include="..\Classes\MovingObject.cpp" />
+    <ClCompile Include="..\Classes\PelletTile.cpp" />
+    <ClCompile Include="..\Classes\PenEntranceTile.cpp" />
+    <ClCompile Include="..\Classes\PowerPelletTile.cpp" />
+    <ClCompile Include="..\Classes\TheManHimself.cpp" />
+    <ClCompile Include="..\Classes\TileBase.cpp" />
+    <ClCompile Include="..\Classes\WallTile.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\FruitTile.h" />
+    <ClInclude Include="..\Classes\Ghost.h" />
+    <ClInclude Include="..\Classes\Level1.h" />
+    <ClInclude Include="..\Classes\MovingObject.h" />
+    <ClInclude Include="..\Classes\PelletTile.h" />
+    <ClInclude Include="..\Classes\PenEntranceTile.h" />
+    <ClInclude Include="..\Classes\PowerPelletTile.h" />
+    <ClInclude Include="..\Classes\TheManHimself.h" />
+    <ClInclude Include="..\Classes\TileBase.h" />
+    <ClInclude Include="..\Classes\WallTile.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

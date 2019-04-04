@@ -10,6 +10,12 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\tiles">
+      <UniqueIdentifier>{18eeb5bd-7042-4792-94bd-4f1f551c4f32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\moving objects">
+      <UniqueIdentifier>{b95cdcbf-4fe7-4fbc-802e-94141513e16f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -18,8 +24,35 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+    <ClCompile Include="..\Classes\Level1.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FruitTile.cpp">
+      <Filter>src\tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PelletTile.cpp">
+      <Filter>src\tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PenEntranceTile.cpp">
+      <Filter>src\tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PowerPelletTile.cpp">
+      <Filter>src\tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\WallTile.cpp">
+      <Filter>src\tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TileBase.cpp">
+      <Filter>src\tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Ghost.cpp">
+      <Filter>src\moving objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MovingObject.cpp">
+      <Filter>src\moving objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TheManHimself.cpp">
+      <Filter>src\moving objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -29,8 +62,35 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
+    <ClInclude Include="..\Classes\Level1.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FruitTile.h">
+      <Filter>src\tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PelletTile.h">
+      <Filter>src\tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PenEntranceTile.h">
+      <Filter>src\tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PowerPelletTile.h">
+      <Filter>src\tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WallTile.h">
+      <Filter>src\tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TileBase.h">
+      <Filter>src\tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Ghost.h">
+      <Filter>src\moving objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MovingObject.h">
+      <Filter>src\moving objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TheManHimself.h">
+      <Filter>src\moving objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
