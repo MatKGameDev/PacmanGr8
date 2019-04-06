@@ -17,6 +17,7 @@ public:
 	static const float MAX_PEN_TIME;
 
 	void removeFromPen();
+	void returnToPen();
 
 	Direction getRandomLookDirection();
 	static void updatePen(const float dt);
