@@ -1,9 +1,11 @@
 #include "TileBase.h"
+#include "EmptyTile.h"
+#include "FruitTile.h"
 
-const cocos2d::Vec2 TileBase::MIN_POSITION = cocos2d::Vec2(300, 30);   //the bottom left position of the first TileBase
-const cocos2d::Vec2 TileBase::MAX_POSITION = cocos2d::Vec2(1140, 960); //the bottom left position of the last TileBase
+const cocos2d::Vec2 TileBase::MIN_POSITION = cocos2d::Vec2(300, 30);   //the bottom left position of the first tile
+const cocos2d::Vec2 TileBase::MAX_POSITION = cocos2d::Vec2(1140, 960); //the bottom left position of the last tile
 
-std::vector<TileBase*> TileBase::tileList = std::vector<TileBase*>(); //list containing every TileBase
+std::vector<TileBase*> TileBase::tileList = std::vector<TileBase*>(); //list containing every tile
 
 //constructor
 TileBase::TileBase(cocos2d::Vec2 a_position, int height, int width)
@@ -12,7 +14,7 @@ TileBase::TileBase(cocos2d::Vec2 a_position, int height, int width)
 	hitbox.setRect(bottomLeftPosition.x, bottomLeftPosition.y, width, height);
 	centerPosition = bottomLeftPosition + cocos2d::Vec2(height / 2, width / 2);
 
-	tileType = Type::empty; //initialize each TileBase to empty (if it's not actually empty, the TileBase's specific constructor will set it properly)
+	tileType = Type::empty; //initialize each tile to empty (if it's not actually empty, the tile's specific constructor will set it properly)
 
 	tileList.push_back(this);
 }
@@ -21,10 +23,18 @@ TileBase::~TileBase()
 {
 }
 
-//removes all tiles from each TileBase vector
+//removes all tiles from any tile vector
 void TileBase::deleteAllTiles()
 {
 	tileList.clear();
+	FruitTile::fruitTileList.clear();
+}
+
+//replaces the current tile with an empty one
+void TileBase::replaceWithEmptyTile()
+{
+	EmptyTile* newEmpty = new EmptyTile(this->getBottomLeftPosition() - MIN_POSITION);
+	delete this;
 }
 
 //resolves any collision on tiles from the given point
@@ -36,7 +46,7 @@ void TileBase::resolveCollisionsOnPoint(cocos2d::Vec2 pointToCheck)
 		tileCollidedWith->resolveCollision();
 }
 
-//gets the TileBase at the specified location (if possible)
+//gets the tile at the specified location (if possible)
 TileBase * TileBase::getTileAt(cocos2d::Vec2 a_position)
 {
 	unsigned int tileListSize = tileList.size();
@@ -49,7 +59,7 @@ TileBase * TileBase::getTileAt(cocos2d::Vec2 a_position)
 	return nullptr;
 }
 
-//checks if the point given is within the TileBase's bounds
+//checks if the point given is within the tile's bounds
 bool TileBase::containsPoint(cocos2d::Vec2 point)
 {
 	if (hitbox.containsPoint(point))

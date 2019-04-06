@@ -14,11 +14,23 @@ public:
 
 	bool init();
 	void initTilemap();
-	void generateLevel();
 	void initSprites();
-	void update(float dt);
+	void initObjects();
+	void initKeyboardListener();
+
+	//keyboard callbacks
+	void keyDownCallback(EventKeyboard::KeyCode keyCode, Event* event);
+
+	void update(const float dt);
+	void updateObjects(const float dt);
+	void updateFruitSpawns();
+	void checkAndResolveGhostOnPacmanCollision();
 
 private:
 	Director* director;
+	EventListenerKeyboard* keyboardListener;
+
+	bool isFirstFruitSpawned;
+	bool isSecondFruitSpawned;
 };
 #endif

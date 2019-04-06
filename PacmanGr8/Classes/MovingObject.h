@@ -15,7 +15,7 @@ public:
 	MovingObject(cocos2d::Vec2 position, std::string spriteFilePath);
 	~MovingObject();
 
-	static const int BASE_SPEED = 100;
+	static const cocos2d::Vec2 BASE_VELOCITY;
 
 	void setVelocity(const cocos2d::Vec2 newVelocity);
 	void setLookDirection(const Direction newDirection);
@@ -23,7 +23,7 @@ public:
 
 	cocos2d::Vec2 getVelocity() const;
 	cocos2d::Sprite* getSprite() const;
-	cocos2d::Vec2 getMiddlePosition() const;
+	cocos2d::Vec2 getCenterPosition() const;
 	float getLeftSidePosition() const;
 	float getRightSidePosition() const;
 	float getTopPosition() const;
@@ -35,7 +35,12 @@ public:
 	float getWidth() const;
 	float getHeight() const;
 
-	void updatePhysics(const float dt);
+	void centerOnCurrentTile();
+
+	void updateLookDirection();
+	void updateMoveDirection();
+	void checkForOutOfBounds();
+	virtual void update(const float dt);
 
 protected:
 	cocos2d::Vec2 velocity;
