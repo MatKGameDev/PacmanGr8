@@ -20,6 +20,8 @@ bool Level1::init()
 	if (!Scene::init())
 		return false;
 
+	PelletTile::pelletsCollected = 0; //reset pellets collected
+
 	director = Director::getInstance();
 	//Setting the default animation rate for the director
 	director->setAnimationInterval(1.0f / 60.0f);
@@ -91,7 +93,9 @@ void Level1::initTilemap()
 
 			//if there's no tile set for the current location on the map, set an empty tile
 			if (!isTileSet)
-				EmptyTile* newEmpty = new EmptyTile(Vec2(300 + (x * 30), 960 - (y * 30)));
+			{
+				EmptyTile* newEmpty = new EmptyTile(Vec2(x * 30, 900 - (y * 30)));
+			}
 		}
 	}
 }
@@ -107,6 +111,10 @@ void Level1::initSprites()
 
 	//add pacman
 	this->addChild(TheManHimself::pacman->getSprite(), 20);
+
+	//add empty tiles for padding on the sides when teleporting
+	EmptyTile* newEmptyTile = new EmptyTile(Vec2(840, 480));
+	EmptyTile* newEmptyTile2 = new EmptyTile(Vec2(-30, 480));
 }
 
 void Level1::initKeyboardListener()
@@ -145,9 +153,34 @@ void Level1::keyDownCallback(EventKeyboard::KeyCode keyCode, Event * event)
 	}
 }
 
-void Level1::update(float dt)
+void Level1::update(const float dt)
+{
+	updateObjects(dt);
+
+	if (PelletTile::pelletsCollected == 1)
+	{
+		delete (TileBase::getTileAt(Vec2(390, 390))); //delete existing tile
+		FruitTile* newApple = new FruitTile(Vec2(390, 390), this, FruitTile::FruitType::apple);
+	}
+	else if (PelletTile::pelletsCollected == 60)
+	{
+		delete (TileBase::getTileAt(Vec2(390, 390))); //delete existing tile
+		FruitTile* newOrange = new FruitTile(Vec2(390, 390), this, FruitTile::FruitType::orange);
+	}
+}
+
+//updates all objects
+void Level1::updateObjects(const float dt)
 {
 	TheManHimself::pacman->update(dt); //update pacman
 
 	TileBase::resolveCollisionsOnPoint(TheManHimself::pacman->getCenterPosition()); //update pacman->tiles collision
+
+	unsigned int fruitListSize = FruitTile::fruitTileList.size();
+	for (unsigned int i = 0; i < fruitListSize; i++)
+	{
+		FruitTile::fruitTileList[i]->reduceLifeTimer(dt);
+		if (FruitTile::fruitTileList[i]->checkAndResolveExpiry())
+			break; //break if a fruit is expiry
+	}
 }

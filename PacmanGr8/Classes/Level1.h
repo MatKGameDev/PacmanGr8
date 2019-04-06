@@ -20,7 +20,8 @@ public:
 	//keyboard callbacks
 	void keyDownCallback(EventKeyboard::KeyCode keyCode, Event* event);
 
-	void update(float dt);
+	void update(const float dt);
+	void updateObjects(const float dt);
 
 private:
 	Director* director;

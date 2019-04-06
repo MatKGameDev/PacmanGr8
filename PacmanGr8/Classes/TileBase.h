@@ -26,6 +26,7 @@ public:
 	static std::vector<TileBase*> tileList;
 
 	static void deleteAllTiles();
+	void replaceWithEmptyTile();
 
 	static void resolveCollisionsOnPoint(cocos2d::Vec2 pointToCheck);
 	static TileBase* getTileAt(cocos2d::Vec2 a_position);

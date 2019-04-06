@@ -55,6 +55,6 @@ void TheManHimself::updateRotation()
 //update pacman each frame
 void TheManHimself::update(float dt)
 {
-	MovingObject::updatePhysics(dt);
+	MovingObject::update(dt);
 	updateRotation();
 }

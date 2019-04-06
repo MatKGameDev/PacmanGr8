@@ -35,7 +35,12 @@ public:
 	float getWidth() const;
 	float getHeight() const;
 
-	void updatePhysics(const float dt);
+	void centerOnCurrentTile();
+
+	void updateLookDirection();
+	void updateMoveDirection();
+	void checkForOutOfBounds();
+	virtual void update(const float dt);
 
 protected:
 	cocos2d::Vec2 velocity;

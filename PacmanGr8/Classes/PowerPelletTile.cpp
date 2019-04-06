@@ -22,7 +22,5 @@ void PowerPelletTile::resolveCollision()
 	TheManHimself::pacman->addToScore(scoreValue); //add score value
 
 	//replace with empty tile
-	EmptyTile* newEmpty = new EmptyTile(this->getBottomLeftPosition());
-
-	delete this;
+	replaceWithEmptyTile();
 }

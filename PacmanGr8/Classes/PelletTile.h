@@ -8,6 +8,7 @@ public:
 	~PelletTile();
 
 	static const int scoreValue = 10;
+	static int pelletsCollected;
 
 	void resolveCollision() override;
 
