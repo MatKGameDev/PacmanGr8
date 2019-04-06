@@ -20,14 +20,13 @@ bool Level1::init()
 	if (!Scene::init())
 		return false;
 
-	PelletTile::pelletsCollected = 0; //reset pellets collected
-
 	director = Director::getInstance();
 	//Setting the default animation rate for the director
 	director->setAnimationInterval(1.0f / 60.0f);
 
 	initTilemap();
 	initSprites();
+	initObjects();
 	initKeyboardListener();
 
 	scheduleUpdate();
@@ -117,6 +116,15 @@ void Level1::initSprites()
 	EmptyTile* newEmptyTile2 = new EmptyTile(Vec2(-30, 480));
 }
 
+void Level1::initObjects()
+{
+	PelletTile::pelletsCollected = 0; //reset pellets collected
+	isFirstFruitSpawned = false;
+	isSecondFruitSpawned = false;
+
+	Ghost::spawnAllGhosts(this);
+}
+
 void Level1::initKeyboardListener()
 {
 	//create the keyboard listener
@@ -157,16 +165,9 @@ void Level1::update(const float dt)
 {
 	updateObjects(dt);
 
-	if (PelletTile::pelletsCollected == 1)
-	{
-		delete (TileBase::getTileAt(Vec2(390, 390))); //delete existing tile
-		FruitTile* newApple = new FruitTile(Vec2(390, 390), this, FruitTile::FruitType::apple);
-	}
-	else if (PelletTile::pelletsCollected == 60)
-	{
-		delete (TileBase::getTileAt(Vec2(390, 390))); //delete existing tile
-		FruitTile* newOrange = new FruitTile(Vec2(390, 390), this, FruitTile::FruitType::orange);
-	}
+	updateFruitSpawns();
+
+	checkAndResolveGhostOnPacmanCollision();
 }
 
 //updates all objects
@@ -176,11 +177,50 @@ void Level1::updateObjects(const float dt)
 
 	TileBase::resolveCollisionsOnPoint(TheManHimself::pacman->getCenterPosition()); //update pacman->tiles collision
 
+	Ghost::updatePen(dt); //update ghost pen
+
+	//update ghosts
+	unsigned int ghostListSize = Ghost::ghostList.size();
+	for (unsigned int i = 0; i < ghostListSize; i++)
+		Ghost::ghostList[i]->update(dt);
+
+	//update fruits and check for expiries
 	unsigned int fruitListSize = FruitTile::fruitTileList.size();
 	for (unsigned int i = 0; i < fruitListSize; i++)
 	{
 		FruitTile::fruitTileList[i]->reduceLifeTimer(dt);
 		if (FruitTile::fruitTileList[i]->checkAndResolveExpiry())
 			break; //break if a fruit is expiry
+	}
+}
+
+//checks for any fruit spawns
+void Level1::updateFruitSpawns()
+{
+	if (PelletTile::pelletsCollected == 70 && !isFirstFruitSpawned)
+	{
+		delete (TileBase::getTileAt(Vec2(390, 390))); //delete existing tile
+		FruitTile* newApple = new FruitTile(Vec2(390, 390), this, FruitTile::FruitType::apple);
+		isFirstFruitSpawned = true;
+	}
+	else if (PelletTile::pelletsCollected == 170 && !isSecondFruitSpawned)
+	{
+		delete (TileBase::getTileAt(Vec2(390, 390))); //delete existing tile
+		FruitTile* newOrange = new FruitTile(Vec2(390, 390), this, FruitTile::FruitType::orange);
+		isSecondFruitSpawned = true;
+	}
+}
+
+void Level1::checkAndResolveGhostOnPacmanCollision()
+{
+	unsigned int ghostListSize = Ghost::ghostList.size();
+	for (unsigned int i = 0; i < ghostListSize; i++)
+	{
+		//check if the ghost and pacman are on the same tile
+		if (TileBase::getTileAt(Ghost::ghostList[i]->getCenterPosition()) == TileBase::getTileAt(TheManHimself::pacman->getCenterPosition()))
+		{
+			//collision!
+
+		}
 	}
 }

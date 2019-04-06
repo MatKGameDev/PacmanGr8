@@ -15,6 +15,7 @@ public:
 	bool init();
 	void initTilemap();
 	void initSprites();
+	void initObjects();
 	void initKeyboardListener();
 
 	//keyboard callbacks
@@ -22,9 +23,14 @@ public:
 
 	void update(const float dt);
 	void updateObjects(const float dt);
+	void updateFruitSpawns();
+	void checkAndResolveGhostOnPacmanCollision();
 
 private:
 	Director* director;
 	EventListenerKeyboard* keyboardListener;
+
+	bool isFirstFruitSpawned;
+	bool isSecondFruitSpawned;
 };
 #endif

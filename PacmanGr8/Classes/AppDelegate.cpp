@@ -46,6 +46,8 @@ bool AppDelegate::applicationDidFinishLaunching()
 	auto glview = director->getOpenGLView();
 	auto console = director->getConsole();
 
+	srand(time(NULL)); //seed rng
+
 	if (!glview)
 	{
 		glview = GLViewImpl::createWithRect("Pacman - Group 8", Rect(0.0f, 0.0f, 1920.f, 1080.f), 1.0f, false);
