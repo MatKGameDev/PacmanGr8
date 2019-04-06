@@ -46,6 +46,13 @@ void Ghost::removeFromPen()
 	isInPen = false;
 }
 
+//returns ghost to pen
+void Ghost::returnToPen()
+{
+	sprite->setPosition(cocos2d::Vec2(705, 510));
+	isInPen = true;
+}
+
 //gets a random direction for the ghost to look
 MovingObject::Direction Ghost::getRandomLookDirection()
 {
