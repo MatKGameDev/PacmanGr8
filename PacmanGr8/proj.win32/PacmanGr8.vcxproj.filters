@@ -54,6 +54,9 @@
     <ClCompile Include="..\Classes\TheManHimself.cpp">
       <Filter>src\moving objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\EmptyTile.cpp">
+      <Filter>src\tiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\TheManHimself.h">
       <Filter>src\moving objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EmptyTile.h">
+      <Filter>src\tiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -14,11 +14,16 @@ public:
 
 	bool init();
 	void initTilemap();
-	void generateLevel();
 	void initSprites();
+	void initKeyboardListener();
+
+	//keyboard callbacks
+	void keyDownCallback(EventKeyboard::KeyCode keyCode, Event* event);
+
 	void update(float dt);
 
 private:
 	Director* director;
+	EventListenerKeyboard* keyboardListener;
 };
 #endif
