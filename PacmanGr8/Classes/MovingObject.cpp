@@ -1,4 +1,7 @@
 #include "MovingObject.h"
+#include "TileBase.h"
+
+const cocos2d::Vec2 MovingObject::BASE_VELOCITY = cocos2d::Vec2(100, 100);
 
 MovingObject::MovingObject(cocos2d::Vec2 position, std::string spriteFilePath)
 {
@@ -8,7 +11,7 @@ MovingObject::MovingObject(cocos2d::Vec2 position, std::string spriteFilePath)
 	width = sprite->getBoundingBox().size.width;
 	height = sprite->getBoundingBox().size.height;
 
-	velocity = cocos2d::Vec2(BASE_SPEED, BASE_SPEED);
+	velocity = BASE_VELOCITY;
 
 	lookDirection = Direction::left;
 	moveDirection = Direction::left;
@@ -49,9 +52,9 @@ cocos2d::Sprite * MovingObject::getSprite() const
 	return sprite;
 }
 
-cocos2d::Vec2 MovingObject::getMiddlePosition() const
+cocos2d::Vec2 MovingObject::getCenterPosition() const
 {
-	return cocos2d::Vec2();
+	return sprite->getPosition();
 }
 
 float MovingObject::getLeftSidePosition() const
@@ -97,33 +100,77 @@ float MovingObject::getHeight() const
 
 void MovingObject::updatePhysics(const float dt)
 {
+	//use look direction to determine if the object can change direction
+	switch (lookDirection)
+	{
+		TileBase* tileToCheck;
+
+	case (up): //check the tile above
+		tileToCheck = TileBase::getTileAt(this->getCenterPosition() + cocos2d::Vec2(0, 30));
+		if (tileToCheck->getType() != TileBase::Type::wall && tileToCheck->getType() != TileBase::Type::wall)
+		{
+			sprite->setPositionX(tileToCheck->getCenterPosition().x);
+			moveDirection = lookDirection;
+		}
+		break;
+
+	case (down): //check the tile below
+		tileToCheck = TileBase::getTileAt(this->getCenterPosition() + cocos2d::Vec2(0, -30));
+		if (tileToCheck->getType() != TileBase::Type::wall && tileToCheck->getType() != TileBase::Type::wall)
+		{
+			sprite->setPositionX(tileToCheck->getCenterPosition().x);
+			moveDirection = lookDirection;
+		}
+		break;
+
+	case (left): //check the tile to the left
+		tileToCheck = TileBase::getTileAt(this->getCenterPosition() + cocos2d::Vec2(-30, 0));
+		if (tileToCheck->getType() != TileBase::Type::wall && tileToCheck->getType() != TileBase::Type::wall)
+		{
+			sprite->setPositionY(tileToCheck->getCenterPosition().y);
+			moveDirection = lookDirection;
+		}
+		break;
+
+	case (right): //check the tile to the right
+		tileToCheck = TileBase::getTileAt(this->getCenterPosition() + cocos2d::Vec2(30, 0));
+		if (tileToCheck->getType() != TileBase::Type::wall && tileToCheck->getType() != TileBase::Type::wall)
+		{
+			sprite->setPositionY(tileToCheck->getCenterPosition().y);
+			moveDirection = lookDirection;
+		}
+		break;
+	}
+
 	//determine velocity based on movement direction
 	switch (moveDirection)
 	{
 	case (up):
-		velocity.x *= 0;
-		if (velocity.y < 0)
-			velocity.y *= -1;
+		velocity.x = 0;
+		velocity.y = BASE_VELOCITY.y;
 		break;
 
 	case (down):
-		velocity.x *= 0;
-		if (velocity.y > 0)
-			velocity.y *= -1;
+		velocity.x = 0;
+		velocity.y = -BASE_VELOCITY.y;
 		break;
 
 	case (left):
-		velocity.y *= 0;
-		if (velocity.x > 0)
-			velocity.x *= -1;
+		velocity.x = -BASE_VELOCITY.x;
+		velocity.y = 0;
 		break;
 
 	case (right):
-		velocity.y *= 0;
-		if (velocity.x < 0)
-			velocity.x *= -1;
+		velocity.x = BASE_VELOCITY.x;
+		velocity.y = 0;
 		break;
 	}
 
 	sprite->setPosition(sprite->getPosition() + velocity * dt); //update position
+
+	//check for map bounds (teleport player to other side)
+	if (getCenterPosition().x < 300)
+		sprite->setPositionX(1140);
+	else if (getCenterPosition().x > 1140)
+		sprite->setPositionX(300);
 }
