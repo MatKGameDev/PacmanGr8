@@ -28,7 +28,7 @@ public:
 	static void deleteAllTiles();
 	void replaceWithEmptyTile();
 
-	static void resolveCollisionsOnPoint(cocos2d::Vec2 pointToCheck);
+	static void resolveCollisionsOnPoint(cocos2d::Vec2 pointToCheck, bool powred);
 	static TileBase* getTileAt(cocos2d::Vec2 a_position);
 	bool containsPoint(cocos2d::Vec2 point);
 

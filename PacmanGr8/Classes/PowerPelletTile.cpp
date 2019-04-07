@@ -20,7 +20,8 @@ PowerPelletTile::~PowerPelletTile()
 void PowerPelletTile::resolveCollision()
 {
 	TheManHimself::pacman->addToScore(scoreValue); //add score value
-
+	//if pacman get powerpellet he gets the powered
+	//TheManHimself::pacman->poweredPac(powred);
 	//replace with empty tile
 	replaceWithEmptyTile();
 }

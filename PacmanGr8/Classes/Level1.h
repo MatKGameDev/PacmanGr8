@@ -32,5 +32,9 @@ private:
 
 	bool isFirstFruitSpawned;
 	bool isSecondFruitSpawned;
+	//wether pacman is powerd or not
+	bool powred = false;
+	//counts how long pac-man has the powred effect 
+	float powerTime = 0.0f;
 };
 #endif

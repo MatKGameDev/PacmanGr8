@@ -38,7 +38,7 @@ void TileBase::replaceWithEmptyTile()
 }
 
 //resolves any collision on tiles from the given point
-void TileBase::resolveCollisionsOnPoint(cocos2d::Vec2 pointToCheck)
+void TileBase::resolveCollisionsOnPoint(cocos2d::Vec2 pointToCheck, bool powred)
 {
 	TileBase* tileCollidedWith = getTileAt(pointToCheck);
 

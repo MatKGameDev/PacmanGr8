@@ -28,6 +28,11 @@ void TheManHimself::addToScore(int amount)
 {
 	score += amount;
 }
+//subtracks one live from the player
+void TheManHimself::livesdown()
+{
+	lives--;
+}
 
 //rotates pacman based on the direction he is moving
 void TheManHimself::updateRotation()
@@ -57,4 +62,14 @@ void TheManHimself::update(float dt)
 {
 	MovingObject::update(dt);
 	updateRotation();
+}
+//will make pacman able to eat ghosts 
+void TheManHimself::poweredPac(bool powred)
+{
+	powred = true;
+}
+//removes pacmans powerd sate
+void TheManHimself::notPowerdPac(bool powred)
+{
+	powred = false;
 }

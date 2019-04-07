@@ -80,6 +80,7 @@ void Level1::initTilemap()
 			{
 				PowerPelletTile* newPowerPellet = new PowerPelletTile(currentTile->getPosition(), this);
 				isTileSet = true;
+
 			}
 
 			//check for pellets
@@ -163,6 +164,15 @@ void Level1::keyDownCallback(EventKeyboard::KeyCode keyCode, Event * event)
 
 void Level1::update(const float dt)
 {
+	//counts how long pac is powerd 
+	powerTime++;
+	//if pac has been powered for 15 seconds
+	if (powerTime = 15.0f)
+	{
+		TheManHimself::pacman->notPowerdPac(powred);
+		powerTime = 0;
+	}
+
 	updateObjects(dt);
 
 	updateFruitSpawns();
@@ -173,9 +183,10 @@ void Level1::update(const float dt)
 //updates all objects
 void Level1::updateObjects(const float dt)
 {
+	
 	TheManHimself::pacman->update(dt); //update pacman
 
-	TileBase::resolveCollisionsOnPoint(TheManHimself::pacman->getCenterPosition()); //update pacman->tiles collision
+	TileBase::resolveCollisionsOnPoint(TheManHimself::pacman->getCenterPosition(), powred); //update pacman->tiles collision
 
 	Ghost::updatePen(dt); //update ghost pen
 
@@ -220,7 +231,16 @@ void Level1::checkAndResolveGhostOnPacmanCollision()
 		if (TileBase::getTileAt(Ghost::ghostList[i]->getCenterPosition()) == TileBase::getTileAt(TheManHimself::pacman->getCenterPosition()))
 		{
 			//collision!
+			if (powred == true)
+			{
 
+			}
+
+			else if(powred == false) {
+				//calls the function to remove a life
+				TheManHimself::pacman->livesdown();
+			}
+			
 		}
 	}
 }
