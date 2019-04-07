@@ -28,7 +28,12 @@ void TheManHimself::createPacman()
 		pacman = new TheManHimself;
 }
 
-int TheManHimself::getScore()
+int TheManHimself::getLives() const
+{
+	return lives;
+}
+
+int TheManHimself::getScore() const
 {
 	return score;
 }
@@ -36,6 +41,12 @@ int TheManHimself::getScore()
 void TheManHimself::addToScore(int amount)
 {
 	score += amount;
+}
+
+void TheManHimself::takeDamage()
+{
+	lives--;
+	sprite->setPosition(cocos2d::Vec2(733, 255));
 }
 
 //rotates pacman based on the direction he is moving

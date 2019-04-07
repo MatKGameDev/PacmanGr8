@@ -19,8 +19,11 @@ public:
 
 	void createPacman();
 
-	int getScore();
+	int getLives() const;
+	int getScore() const;
 	void addToScore(int amount);
+
+	void takeDamage();
 
 	void updateRotation();
 	void update(float dt);

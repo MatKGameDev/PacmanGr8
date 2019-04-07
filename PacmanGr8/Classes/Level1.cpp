@@ -42,6 +42,7 @@ bool Level1::init()
 	initSprites();
 	initObjects();
 	initKeyboardListener();
+	initLabels();
 
 	scheduleUpdate();
 
@@ -140,6 +141,17 @@ void Level1::initObjects()
 	Ghost::spawnAllGhosts(this);
 }
 
+void Level1::initLabels()
+{
+	scoreLabel = Label::createWithTTF("Score: " + std::to_string(TheManHimself::pacman->getScore()), "fonts/Marker Felt.ttf", 36);
+	scoreLabel->setPosition(Vec2(800, 1010));
+	this->addChild(scoreLabel, 50);
+
+	livesLabel = Label::createWithTTF("Lives: " + std::to_string(TheManHimself::pacman->getLives()), "fonts/Marker Felt.ttf", 36);
+	livesLabel->setPosition(Vec2(600, 1010));
+	this->addChild(livesLabel, 50);
+}
+
 void Level1::initKeyboardListener()
 {
 	//create the keyboard listener
@@ -193,6 +205,14 @@ void Level1::update(const float dt)
 	updateFruitSpawns();
 
 	checkAndResolveGhostOnPacmanCollision();
+
+	//update labels
+	scoreLabel->setString("Score: " + std::to_string(TheManHimself::pacman->getScore()));
+	livesLabel->setString("Lives: " + std::to_string(TheManHimself::pacman->getLives()));
+
+	//check for game over
+	if (TheManHimself::pacman->getLives() == 0)
+		director->end();
 }
 
 //updates all objects
@@ -246,7 +266,15 @@ void Level1::checkAndResolveGhostOnPacmanCollision()
 		if (TileBase::getTileAt(Ghost::ghostList[i]->getCenterPosition()) == TileBase::getTileAt(TheManHimself::pacman->getCenterPosition()))
 		{
 			//collision!
-			
+			if (Ghost::ghostList[i]->getCurrentState() == Ghost::State::normal) //ghost isnt scared
+			{
+				TheManHimself::pacman->takeDamage();
+			}
+			else //ghost is scared
+			{
+				TheManHimself::pacman->addToScore(200);
+				Ghost::ghostList[i]->returnToPen();
+			}
 		}
 	}
 }
