@@ -7,11 +7,25 @@
 #include "EmptyTile.h"
 #include "TheManHimself.h"
 #include "Ghost.h"
+#include "Audio.h"
+#include "AudioLibrary.h"
 
 Scene * Level1::createScene()
 {
 	Scene* scene = Level1::create();
 	return scene;
+}
+
+void Level1::preloadAudio()
+{
+	AudioLibrary::Intermission.preload(); //preloads all the sounds into the game
+	AudioLibrary::Intro.preload();
+	AudioLibrary::Fruit.preload();
+	AudioLibrary::Death.preload();
+	AudioLibrary::eatGhost.preload();
+	AudioLibrary::Chomp.preload();
+	AudioLibrary::ExtraPac.preload();
+
 }
 
 //initialize scene
@@ -141,37 +155,47 @@ void Level1::initKeyboardListener()
 //keyboard callback for user input
 void Level1::keyDownCallback(EventKeyboard::KeyCode keyCode, Event * event)
 {
+	AudioLibrary::Chomp.preload();
+
 	//set look direction based on directional key pressed
 	switch (keyCode)
 	{
 	case EventKeyboard::KeyCode::KEY_UP_ARROW:
 		TheManHimself::pacman->setLookDirection(MovingObject::Direction::up);
+		AudioLibrary::Chomp.play();
 		break;
 
 	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
 		TheManHimself::pacman->setLookDirection(MovingObject::Direction::down);
+		AudioLibrary::Chomp.play();
 		break;
 
 	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
 		TheManHimself::pacman->setLookDirection(MovingObject::Direction::left);
+		AudioLibrary::Chomp.play();
 		break;
 
 	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
 		TheManHimself::pacman->setLookDirection(MovingObject::Direction::right);
+		AudioLibrary::Chomp.play();
 		break;
 	}
 }
+
+
 
 void Level1::update(const float dt)
 {
 	//counts how long pac is powerd 
 	powerTime++;
 	//if pac has been powered for 15 seconds
-	if (powerTime = 15.0f)
 	{
+	if (powerTime = 15.0f)
 		TheManHimself::pacman->notPowerdPac(powred);
 		powerTime = 0;
 	}
+
+	preloadAudio();//preloads the audio
 
 	updateObjects(dt);
 
