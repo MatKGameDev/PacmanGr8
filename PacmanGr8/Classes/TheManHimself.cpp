@@ -1,4 +1,14 @@
+/*
+	OOP Pacman Group 8
+		Mathew Kostrzewa        - 100591924
+		Michelle Escobar Cubias - 100709888 -
+		Sean Birket             - 100704214
+		Charley Fai             - 100698666
+		Devin Fitzpatrick       - 100709082
+*/
+
 #include "TheManHimself.h"
+#include "AudioLibrary.h"
 
 TheManHimself* TheManHimself::pacman = 0;
 
@@ -19,7 +29,12 @@ void TheManHimself::createPacman()
 		pacman = new TheManHimself;
 }
 
-int TheManHimself::getScore()
+int TheManHimself::getLives() const
+{
+	return lives;
+}
+
+int TheManHimself::getScore() const
 {
 	return score;
 }
@@ -32,6 +47,13 @@ void TheManHimself::addToScore(int amount)
 void TheManHimself::livesdown()
 {
 	lives--;
+}
+
+void TheManHimself::takeDamage()
+{
+	lives--;
+	sprite->setPosition(cocos2d::Vec2(733, 255));
+	AudioLibrary::Death.play();
 }
 
 //rotates pacman based on the direction he is moving

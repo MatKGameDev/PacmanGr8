@@ -1,6 +1,16 @@
+/*
+	OOP Pacman Group 8
+		Mathew Kostrzewa        - 100591924
+		Michelle Escobar Cubias - 100709888 -
+		Sean Birket             - 100704214
+		Charley Fai             - 100698666
+		Devin Fitzpatrick       - 100709082
+*/
+
 #include "PelletTile.h"
 #include "EmptyTile.h"
 #include "TheManHimself.h"
+#include "AudioLibrary.h"
 
 int PelletTile::pelletsCollected = 0;
 
@@ -20,6 +30,7 @@ PelletTile::~PelletTile()
 
 void PelletTile::resolveCollision()
 {
+	AudioLibrary::Chomp.play();
 	TheManHimself::pacman->addToScore(scoreValue); //add score value
 	pelletsCollected++; //increment pellets collected
 

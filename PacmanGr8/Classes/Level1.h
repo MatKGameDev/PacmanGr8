@@ -17,6 +17,7 @@ public:
 	void initTilemap();
 	void initSprites();
 	void initObjects();
+	void initLabels();
 	void initKeyboardListener();
 
 	//keyboard callbacks
@@ -30,6 +31,9 @@ public:
 private:
 	Director* director;
 	EventListenerKeyboard* keyboardListener;
+
+	Label* scoreLabel;
+	Label* livesLabel;
 
 	bool isFirstFruitSpawned;
 	bool isSecondFruitSpawned;
