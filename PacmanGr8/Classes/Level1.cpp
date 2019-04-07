@@ -37,6 +37,7 @@ bool Level1::init()
 	director = Director::getInstance();
 	//Setting the default animation rate for the director
 	director->setAnimationInterval(1.0f / 60.0f);
+	AudioLibrary::Intro.play();
 
 	initTilemap();
 	initSprites();

@@ -8,6 +8,7 @@
 */
 
 #include "TheManHimself.h"
+#include "AudioLibrary.h"
 
 TheManHimself* TheManHimself::pacman = 0;
 
@@ -47,6 +48,7 @@ void TheManHimself::takeDamage()
 {
 	lives--;
 	sprite->setPosition(cocos2d::Vec2(733, 255));
+	AudioLibrary::Death.play();
 }
 
 //rotates pacman based on the direction he is moving

@@ -10,6 +10,7 @@
 #include "PelletTile.h"
 #include "EmptyTile.h"
 #include "TheManHimself.h"
+#include "AudioLibrary.h"
 
 int PelletTile::pelletsCollected = 0;
 
@@ -29,6 +30,7 @@ PelletTile::~PelletTile()
 
 void PelletTile::resolveCollision()
 {
+	AudioLibrary::Chomp.play();
 	TheManHimself::pacman->addToScore(scoreValue); //add score value
 	pelletsCollected++; //increment pellets collected
 
