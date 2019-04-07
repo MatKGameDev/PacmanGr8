@@ -16,6 +16,8 @@
 #include "EmptyTile.h"
 #include "TheManHimself.h"
 #include "Ghost.h"
+#include "Audio.h"
+#include "AudioLibrary.h"
 
 Scene * Level1::createScene()
 {
