@@ -1,3 +1,12 @@
+/*
+	OOP Pacman Group 8
+		Mathew Kostrzewa        - 100591924
+		Michelle Escobar Cubias -
+		Sean Birket             - 100704214
+		Charley Fai             - 100698666
+		Devin Fitzpatrick       - 100709082
+*/
+
 #include "Ghost.h"
 
 std::vector<Ghost*> Ghost::ghostList = std::vector<Ghost*>(); //list containing every ghost
@@ -108,7 +117,6 @@ void Ghost::updatePen(const float dt)
 				penTimer = 0.0f;
 				break;
 			}
-
 		}
 	}
 }
