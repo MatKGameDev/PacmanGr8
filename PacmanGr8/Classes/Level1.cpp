@@ -1,12 +1,3 @@
-/*
-	OOP Pacman Group 8
-		Mathew Kostrzewa        - 100591924
-		Michelle Escobar Cubias - 100709888 -
-		Sean Birket             - 100704214
-		Charley Fai             - 100698666
-		Devin Fitzpatrick       - 100709082
-*/
-
 #include "Level1.h"
 #include "WallTile.h"
 #include "PenEntranceTile.h"
@@ -103,6 +94,7 @@ void Level1::initTilemap()
 			{
 				PowerPelletTile* newPowerPellet = new PowerPelletTile(currentTile->getPosition(), this);
 				isTileSet = true;
+
 			}
 
 			//check for pellets
@@ -206,6 +198,7 @@ void Level1::update(const float dt)
 //updates all objects
 void Level1::updateObjects(const float dt)
 {
+	
 	TheManHimself::pacman->update(dt); //update pacman
 
 	TileBase::resolveCollisionsOnPoint(TheManHimself::pacman->getCenterPosition()); //update pacman->tiles collision
@@ -253,7 +246,7 @@ void Level1::checkAndResolveGhostOnPacmanCollision()
 		if (TileBase::getTileAt(Ghost::ghostList[i]->getCenterPosition()) == TileBase::getTileAt(TheManHimself::pacman->getCenterPosition()))
 		{
 			//collision!
-
+			
 		}
 	}
 }
