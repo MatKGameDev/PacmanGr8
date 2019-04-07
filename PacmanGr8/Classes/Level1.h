@@ -11,6 +11,7 @@ class Level1 : public cocos2d::Scene
 public:
 	CREATE_FUNC(Level1);
 	static Scene* createScene();
+	static void preloadAudio();
 
 	bool init();
 	void initTilemap();

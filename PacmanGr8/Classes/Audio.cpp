@@ -21,7 +21,7 @@ void profileSetup() {
 }
 
 Sound::Sound(std::string _effect, bool _loop) {
-	effect = "audio/fx/" + _effect + ".mp3";
+	effect = _effect + ".mp3";
 	loop = _loop;
 }
 

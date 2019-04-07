@@ -16,6 +16,9 @@
     <Filter Include="src\moving objects">
       <UniqueIdentifier>{b95cdcbf-4fe7-4fbc-802e-94141513e16f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Audio">
+      <UniqueIdentifier>{edae6a04-1942-4951-ba9b-8fa63199dc87}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -57,6 +60,12 @@
     <ClCompile Include="..\Classes\EmptyTile.cpp">
       <Filter>src\tiles</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Audio.cpp">
+      <Filter>src\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AudioLibrary.cpp">
+      <Filter>src\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -97,6 +106,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\EmptyTile.h">
       <Filter>src\tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Audio.h">
+      <Filter>src\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AudioLibrary.h">
+      <Filter>src\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
